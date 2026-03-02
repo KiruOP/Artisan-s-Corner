@@ -1,11 +1,47 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ProductDetail from './pages/ProductDetail';
+import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
+import SellerDashboard from './pages/Dashboard/SellerDashboard';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <h1 className="text-4xl font-bold text-blue-600 mb-4">Artisan's Corner</h1>
-      <p className="text-lg text-gray-700">Multi-Vendor Marketplace Starter</p>
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow bg-gray-50">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route
+              path="/checkout"
+              element={
+                <ProtectedRoute>
+                  <Checkout />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/seller"
+              element={
+                <ProtectedRoute roles={['vendor']}>
+                  <SellerDashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
+      </div>
+    </Router>
   );
 }
 
