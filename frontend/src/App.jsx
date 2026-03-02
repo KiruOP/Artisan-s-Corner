@@ -13,9 +13,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen bg-black text-white selection:bg-blue-500/30">
+      <div className="flex flex-col min-h-screen bg-[var(--color-background-soft)] text-[var(--color-text-primary)] selection:bg-[var(--color-brand)]/30">
         <Navbar />
-        <main className="flex-grow pt-16">
+        <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

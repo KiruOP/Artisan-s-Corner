@@ -1,31 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #000000;
-  --color-surface: #1c1c1e;
-  --color-surface-hover: #2c2c2e;
-  --color-primary: #0a84ff; /* Apple Blue */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #8e8e93;
-  --color-border: #38383a;
+  --color-brand: #61c521;
+  --color-brand-hover: #50a618;
+  --color-background-soft: #f9f9fb;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f3f4f6;
+  --color-text-primary: #111827;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
 }
 
 body {
-  background-color: var(--color-background);
+  background-color: var(--color-background-soft);
   color: var(--color-text-primary);
-  font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Utilities for Glassmorphism */
+/* Base custom utilities */
 @layer utilities {
-  .glass {
-    background: rgba(28, 28, 30, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+  .btn-primary {
+    @apply bg-[var(--color-brand)] text-white font-medium rounded-full transition-colors hover:bg-[var(--color-brand-hover)] px-6 py-2.5;
   }
 }

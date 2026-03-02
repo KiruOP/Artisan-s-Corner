@@ -61,44 +61,47 @@ const Login = () => {
     };
 
     return (
-        <div className="bg-black min-h-[calc(100vh-64px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-[#1c1c1e] p-10 rounded-[32px] shadow-2xl border border-[#2c2c2e]/50">
+        <div className="bg-[var(--color-background-soft)] min-h-[calc(100vh-80px)] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-[32px] shadow-sm border border-gray-100">
                 <div>
-                    <h2 className="mt-2 text-center text-4xl font-bold text-white tracking-tight">
+                    <div className="mx-auto w-12 h-12 bg-[#bcf0a3]/50 rounded-full flex items-center justify-center text-[var(--color-brand)] mb-4">
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                    </div>
+                    <h2 className="mt-2 text-center text-3xl font-bold text-gray-900 tracking-tight">
                         Welcome Back
                     </h2>
-                    <p className="mt-4 text-center text-sm text-gray-400">
-                        Sign in to access your account
+                    <p className="mt-2 text-center text-sm text-gray-500">
+                        Sign in to access your artisan account
                     </p>
                 </div>
 
                 {(isError || localError) && (
-                    <div className="bg-[#ff453a]/10 border border-[#ff453a]/30 rounded-2xl p-4 mb-4 text-center">
-                        <p className="text-sm text-[#ff453a] font-medium">{localError || message}</p>
+                    <div className="bg-red-50 border border-red-100 rounded-2xl p-4 mb-4 text-center">
+                        <p className="text-sm text-red-600 font-medium">{localError || message}</p>
                     </div>
                 )}
 
                 <form className="mt-8 space-y-6" onSubmit={onSubmit}>
-                    <div className="space-y-4">
+                    <div className="space-y-5">
                         <div>
-                            <label className="text-sm font-medium text-gray-400 block mb-2 px-1">Email Address</label>
+                            <label className="text-sm font-medium text-gray-700 block mb-2 px-1">Email Address</label>
                             <input
                                 name="email"
                                 type="email"
                                 required
-                                className="appearance-none block w-full px-4 py-3 bg-[#2c2c2e] border border-transparent placeholder-gray-500 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0a84ff] focus:bg-[#38383a] sm:text-base outline-none transition-colors"
+                                className="appearance-none block w-full px-4 py-3 bg-gray-50 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:bg-white sm:text-sm transition-colors"
                                 placeholder="you@example.com"
                                 value={formData.email}
                                 onChange={onChange}
                             />
                         </div>
                         <div>
-                            <label className="text-sm font-medium text-gray-400 block mb-2 px-1">Password</label>
+                            <label className="text-sm font-medium text-gray-700 block mb-2 px-1">Password</label>
                             <input
                                 name="password"
                                 type="password"
                                 required
-                                className="appearance-none block w-full px-4 py-3 bg-[#2c2c2e] border border-transparent placeholder-gray-500 text-white rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#0a84ff] focus:bg-[#38383a] sm:text-base outline-none transition-colors"
+                                className="appearance-none block w-full px-4 py-3 bg-gray-50 border border-gray-200 placeholder-gray-400 text-gray-900 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)] focus:bg-white sm:text-sm transition-colors"
                                 placeholder="••••••••"
                                 value={formData.password}
                                 onChange={onChange}
@@ -109,16 +112,16 @@ const Login = () => {
                     <div className="pt-2">
                         <button
                             type="submit"
-                            className="w-full flex justify-center py-4 px-4 border border-transparent text-base font-semibold rounded-2xl text-white bg-[#0a84ff] hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[#1c1c1e] focus:ring-[#0a84ff] transition-all active:scale-[0.98] shadow-lg shadow-blue-500/20"
+                            className="w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-bold rounded-full text-white bg-[var(--color-brand)] hover:bg-[var(--color-brand-hover)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-brand)] transition-all shadow-sm"
                         >
                             Sign In
                         </button>
                     </div>
 
                     <div className="text-center pt-2">
-                        <p className="text-sm text-gray-400">
+                        <p className="text-sm text-gray-500">
                             Don't have an account?{' '}
-                            <Link to="/register" className="font-medium text-[#0a84ff] hover:text-blue-400 transition-colors">
+                            <Link to="/register" className="font-medium text-[var(--color-brand)] hover:text-[var(--color-brand-hover)] transition-colors">
                                 Sign up
                             </Link>
                         </p>
