@@ -44,11 +44,14 @@ const orderSchema = new mongoose.Schema(
             required: true,
             default: 0.0,
         },
-        vendorPayout: {
-            type: Number,
-            required: true,
-            default: 0.0,
-        },
+        vendorPayout: [
+            {
+                vendor: { type: mongoose.Schema.ObjectId, ref: 'User' },
+                amount: { type: Number, required: true },
+                isPaid: { type: Boolean, default: false },
+                paidAt: { type: Date }
+            }
+        ],
         status: {
             type: String,
             enum: ['processing', 'shipped', 'delivered'],

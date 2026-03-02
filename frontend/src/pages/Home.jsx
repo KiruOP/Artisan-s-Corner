@@ -4,9 +4,17 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 
+const MOCK_PRODUCTS = [
+    { _id: 'm1', title: 'Handcrafted Ceramic Vase', description: 'A beautiful, minimalist ceramic vase perfectly fired to complement modern dark aesthetics.', price: 65.00, images: ['https://placehold.co/600x600/1c1c1e/ffffff?text=Ceramic+Vase'], vendor: { name: 'Luna Ceramics', storeProfile: { storeName: 'Luna Ceramics' } }, category: 'Home Decor', stock: 12 },
+    { _id: 'm2', title: 'Woven Cotton Throw', description: 'Cozy and stylish woven throw blanket made from 100% organic cotton.', price: 120.00, images: ['https://placehold.co/600x600/1c1c1e/ffffff?text=Woven+Throw'], vendor: { name: 'Thread & Needle', storeProfile: { storeName: 'Thread & Needle' } }, category: 'Bedding', stock: 5 },
+    { _id: 'm3', title: 'Minimalist Desk Lamp', description: 'Matte black minimalist desk lamp providing warm accent lighting.', price: 89.99, images: ['https://placehold.co/600x600/1c1c1e/ffffff?text=Desk+Lamp'], vendor: { name: 'Lumina', storeProfile: { storeName: 'Lumina Design' } }, category: 'Lighting', stock: 8 },
+    { _id: 'm4', title: 'Artisan Coffee Set', description: 'Pour-over coffee set featuring a glass carafe and precise aesthetic dripper.', price: 55.00, images: ['https://placehold.co/600x600/1c1c1e/ffffff?text=Coffee+Set'], vendor: { name: 'Brew Masters', storeProfile: { storeName: 'Brew Masters' } }, category: 'Kitchen', stock: 20 },
+];
+
 const Home = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [errorMsg, setErrorMsg] = useState('');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,7 +23,9 @@ const Home = () => {
                 const { data } = await axios.get('http://localhost:5000/api/products');
                 setProducts(data);
             } catch (error) {
-                console.error("Error fetching products", error);
+                console.warn("Backend unavailable. Loading mock products for showcase.", error);
+                setErrorMsg('Backend connection failed. Displaying offline showcase items.');
+                setProducts(MOCK_PRODUCTS);
             } finally {
                 setLoading(false);
             }
@@ -24,67 +34,83 @@ const Home = () => {
         fetchProducts();
     }, []);
 
-    const handleAddToCart = (product) => {
+    const handleAddToCart = (e, product) => {
+        e.preventDefault(); // Prevent link trigger
         dispatch(addToCart({
             product: product._id,
             title: product.title,
             price: product.price,
             quantity: 1,
             image: product.images[0],
-            vendor: product.vendor._id || product.vendor,
+            vendor: product.vendor?._id || product.vendor?.name || 'mock_vendor',
         }));
     };
 
-    if (loading) return <div className="text-center mt-20">Loading amazing products...</div>;
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-black">
+                <div className="animate-pulse flex flex-col items-center">
+                    <div className="h-12 w-12 bg-[#2c2c2e] rounded-full mb-4"></div>
+                    <div className="text-gray-500 font-medium">Loading collection...</div>
+                </div>
+            </div>
+        );
+    }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div className="text-center mb-16">
-                <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                    Discover Unique <span className="text-blue-600">Artisan</span> Craft
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-black min-h-screen">
+
+            {errorMsg && (
+                <div className="mb-8 p-4 bg-orange-900/20 border border-orange-500/30 rounded-2xl flex items-center justify-center">
+                    <svg className="h-5 w-5 text-orange-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span className="text-orange-400 text-sm font-medium">{errorMsg}</span>
+                </div>
+            )}
+
+            <div className="text-center mb-20 mt-10">
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6" style={{ letterSpacing: '-0.02em' }}>
+                    Discover Unique. <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0a84ff] to-[#5efc82]">Support Artisans.</span>
                 </h1>
-                <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-                    Support independent vendors and find exactly what you're looking for.
+                <p className="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-gray-400 font-light">
+                    Curated marketplace featuring independent creators. Find products that tell a story.
                 </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {products.map((product) => (
-                    <div key={product._id} className="bg-white rounded-xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden group">
-                        <Link to={`/product/${product._id}`}>
-                            <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-gray-200">
+                    <Link key={product._id} to={`/product/${product._id}`} className="group block">
+                        <div className="bg-[#1c1c1e] rounded-3xl overflow-hidden transition-all duration-300 hover:bg-[#2c2c2e] hover:shadow-2xl hover:-translate-y-1 hover:shadow-blue-500/10 border border-[#2c2c2e]/50">
+                            <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-[#2c2c2e]">
                                 <img
-                                    src={product.images[0]?.startsWith('http') ? product.images[0] : 'https://placehold.co/400x300?text=Product'}
+                                    src={product.images[0]?.startsWith('http') ? product.images[0] : 'https://placehold.co/400x400/2c2c2e/ffffff'}
                                     alt={product.title}
-                                    className="w-full h-64 object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                                    className="w-full h-72 object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                                 />
                             </div>
-                        </Link>
-                        <div className="p-5">
-                            <Link to={`/product/${product._id}`}>
-                                <h3 className="text-lg font-bold text-gray-900 truncate hover:text-blue-600 transition-colors">
+                            <div className="p-6">
+                                <h3 className="text-lg font-semibold text-white truncate tracking-tight">
                                     {product.title}
                                 </h3>
-                            </Link>
-                            <p className="mt-1 text-sm text-gray-500 line-clamp-2">{product.description}</p>
+                                <p className="mt-1 text-sm text-gray-400 line-clamp-1">{product.category}</p>
 
-                            <div className="mt-4 flex items-center justify-between">
-                                <span className="text-xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
-                                <button
-                                    onClick={() => handleAddToCart(product)}
-                                    className="bg-gray-900 hover:bg-blue-600 text-white p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                                    aria-label="Add to cart"
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                </button>
-                            </div>
-                            <div className="mt-2 text-xs text-gray-400">
-                                Vendor: {product.vendor?.storeProfile?.storeName || product.vendor?.name || 'Unknown'}
+                                <div className="mt-6 flex items-center justify-between">
+                                    <span className="text-xl font-medium text-white tracking-tight">${product.price.toFixed(2)}</span>
+                                    <button
+                                        onClick={(e) => handleAddToCart(e, product)}
+                                        className="flex justify-center items-center w-10 h-10 bg-[#38383a] group-hover:bg-[#0a84ff] text-white rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#0a84ff]"
+                                        aria-label="Add to cart"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" />
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))}
             </div>
         </div>

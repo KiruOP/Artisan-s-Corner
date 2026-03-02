@@ -23,18 +23,32 @@ export const addOrderItems = async (req, res) => {
             // Calculate prices and commissions
             let totalAmount = 0;
             let platformFee = 0;
-            let vendorPayout = 0;
+            const vendorTotals = {};
 
-            // Group items by vendor (simplification: assuming 1 vendor per order for payout logic,
-            // or we just calculate total splits for the order object).
-            // Here we calculate total amount based on the prices passed from frontend (better to fetch from DB in prod)
+            // Calculate totals per vendor and overall
             for (const item of orderItems) {
-                totalAmount += item.price * item.quantity;
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+
+                const vendorId = item.vendor;
+                if (!vendorTotals[vendorId]) {
+                    vendorTotals[vendorId] = 0;
+                }
+                vendorTotals[vendorId] += itemTotal;
             }
 
-            // 5% Commission Logic
+            // 5% Commission Logic across the whole order
             platformFee = Number((totalAmount * 0.05).toFixed(2));
-            vendorPayout = Number((totalAmount - platformFee).toFixed(2));
+
+            // Build the payout array (Vendor gets 95% of their item sales)
+            const vendorPayout = [];
+            for (const [vendorId, vTotal] of Object.entries(vendorTotals)) {
+                vendorPayout.push({
+                    vendor: vendorId,
+                    amount: Number((vTotal * 0.95).toFixed(2)),
+                    isPaid: false
+                });
+            }
 
             // Create Payment Intent with Stripe (if not already done on frontend)
             let paymentIntent;
@@ -136,6 +150,41 @@ export const updateOrderToDelivered = async (req, res) => {
             }
 
             order.status = 'delivered';
+            const updatedOrder = await order.save();
+            res.json(updatedOrder);
+        } else {
+            res.status(404).json({ message: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Simulate and record a vendor payout
+// @route   PUT /api/orders/:id/payout
+// @access  Private/Admin
+export const recordVendorPayout = async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        const { vendorId } = req.body; // Specifically which vendor in the order got paid
+
+        if (order) {
+            // If they provided a vendor ID, pay them out locally. Otherwise pay out everyone.
+            if (vendorId) {
+                const vendorPayout = order.vendorPayout.find(vp => vp.vendor.toString() === vendorId.toString());
+                if (vendorPayout) {
+                    vendorPayout.isPaid = true;
+                    vendorPayout.paidAt = Date.now();
+                } else {
+                    return res.status(404).json({ message: 'Vendor payout not found in this order' });
+                }
+            } else {
+                order.vendorPayout.forEach(vp => {
+                    vp.isPaid = true;
+                    vp.paidAt = Date.now();
+                });
+            }
+
             const updatedOrder = await order.save();
             res.json(updatedOrder);
         } else {

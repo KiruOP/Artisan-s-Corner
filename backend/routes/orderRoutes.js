@@ -5,6 +5,7 @@ import {
     getMyOrders,
     getVendorOrders,
     updateOrderToDelivered,
+    recordVendorPayout,
 } from '../controllers/orderController.js';
 import { protect, authorizeRoles } from '../middleware/authMiddleware.js';
 
@@ -20,5 +21,6 @@ router.route('/:id')
     .get(protect, getOrderById);
 
 router.put('/:id/deliver', protect, authorizeRoles('vendor', 'admin'), updateOrderToDelivered);
+router.put('/:id/payout', protect, authorizeRoles('admin'), recordVendorPayout);
 
 export default router;
