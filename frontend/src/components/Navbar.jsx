@@ -47,7 +47,7 @@ const Navbar = () => {
                         <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">Stories</Link>
                         <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
                         {user?.roles?.includes('buyer') && !user?.roles?.includes('vendor') && (
-                            <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">Sell on Artisan</Link>
+                            <Link to="/dashboard/setup" className="text-gray-600 hover:text-gray-900 font-medium">Sell on Artisan</Link>
                         )}
                         {user?.roles?.includes('vendor') && (
                             <Link to="/dashboard/seller" className="text-gray-600 hover:text-gray-900 font-medium">Dashboard</Link>

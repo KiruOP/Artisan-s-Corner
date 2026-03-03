@@ -7,7 +7,8 @@ import { useToast } from '../context/ToastContext';
 
 const Checkout = () => {
     const { items, totalPrice } = useSelector((state) => state.cart);
-    const { user, token } = useSelector((state) => state.auth);
+    const { user } = useSelector((state) => state.auth);
+    const token = user?.token;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { success, info } = useToast();
@@ -53,17 +54,17 @@ const Checkout = () => {
                 shippingAddress,
             };
 
-            await axios.post('http://localhost:5000/api/orders', orderData, config);
+            const res = await axios.post('http://localhost:5000/api/orders', orderData, config);
 
-            success('Order Placed Successfully! (Mock Stripe Executed)');
+            success('Order Placed Successfully!');
             dispatch(clearCart());
-            navigate('/');
+            navigate(`/order-confirmation/${res.data._id}`);
         } catch (error) {
             console.warn("Backend unavailable. Simulating clear cart.");
             // Offline mock flow
             info('Order Placed Successfully! (Offline Mock Mode)');
             dispatch(clearCart());
-            navigate('/');
+            navigate('/order-confirmation/success');
         } finally {
             setLoading(false);
         }

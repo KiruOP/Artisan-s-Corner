@@ -86,12 +86,12 @@ const SellerDashboard = () => {
                         </h2>
                     </div>
                     <div className="mt-4 flex md:mt-0 md:ml-4 gap-3">
-                        <button className="inline-flex items-center px-6 py-3 border border-[#38383a] rounded-2xl shadow-sm text-sm font-medium text-white bg-[#1c1c1e] hover:bg-[#2c2c2e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#38383a] transition-all active:scale-[0.98]">
-                            Manage Profile
-                        </button>
-                        <button className="inline-flex items-center px-6 py-3 border border-transparent rounded-2xl shadow-lg shadow-blue-500/20 text-sm font-medium text-white bg-[#0a84ff] hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#0a84ff] transition-all active:scale-[0.98]">
+                        <Link to="/dashboard/products" className="inline-flex items-center px-6 py-3 border border-[#38383a] rounded-2xl shadow-sm text-sm font-medium text-white bg-[#1c1c1e] hover:bg-[#2c2c2e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#38383a] transition-all active:scale-[0.98]">
+                            Manage Products
+                        </Link>
+                        <Link to="/dashboard/products/new" className="inline-flex items-center px-6 py-3 border border-transparent rounded-2xl shadow-lg shadow-blue-500/20 text-sm font-medium text-white bg-[#0a84ff] hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black focus:ring-[#0a84ff] transition-all active:scale-[0.98]">
                             Add Product
-                        </button>
+                        </Link>
                     </div>
                 </div>
 

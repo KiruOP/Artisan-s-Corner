@@ -10,7 +10,11 @@ import Register from './pages/Register';
 import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
+import OrderConfirmation from './pages/OrderConfirmation';
 import SellerDashboard from './pages/Dashboard/SellerDashboard';
+import VendorSetup from './pages/Dashboard/VendorSetup';
+import VendorProducts from './pages/Dashboard/VendorProducts';
+import AddProduct from './pages/Dashboard/AddProduct';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
 import ServerError from './pages/ServerError';
@@ -38,10 +42,42 @@ function App() {
                 }
               />
               <Route
+                path="/order-confirmation/:id"
+                element={
+                  <ProtectedRoute>
+                    <OrderConfirmation />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
                 path="/dashboard/seller"
                 element={
                   <ProtectedRoute roles={['vendor']}>
                     <SellerDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/setup"
+                element={
+                  <ProtectedRoute>
+                    <VendorSetup />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/products"
+                element={
+                  <ProtectedRoute roles={['vendor']}>
+                    <VendorProducts />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/products/new"
+                element={
+                  <ProtectedRoute roles={['vendor']}>
+                    <AddProduct />
                   </ProtectedRoute>
                 }
               />
