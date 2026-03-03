@@ -10,6 +10,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [qty, setQty] = useState(1);
+    const [mainImage, setMainImage] = useState('');
+    const [activeTab, setActiveTab] = useState('Description');
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -17,6 +19,9 @@ const ProductDetail = () => {
             try {
                 const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
                 setProduct(data);
+                if (data.images && data.images.length > 0) {
+                    setMainImage(data.images[0]);
+                }
             } catch (error) {
                 console.error("Backend unavailable. Unable to fetch product detail.");
             } finally {
@@ -75,15 +80,15 @@ const ProductDetail = () => {
                                 <svg className="w-5 h-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
                             </button>
                             <img
-                                src={product.images[0]?.startsWith('http') ? product.images[0] : 'https://placehold.co/800x800/f3f4f6/a1a1aa'}
+                                src={mainImage?.startsWith('http') ? mainImage : 'https://placehold.co/800x800/f3f4f6/a1a1aa'}
                                 alt={product.title}
                                 className="w-full h-full object-cover"
                             />
                         </div>
                         <div className="grid grid-cols-4 gap-4">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className={`rounded-xl overflow-hidden aspect-square cursor-pointer border-2 ${i === 1 ? 'border-[var(--color-brand)]' : 'border-transparent'}`}>
-                                    <img src={product.images[0]} alt="" className="w-full h-full object-cover opacity-80 hover:opacity-100" />
+                            {[...product.images, ...Array(Math.max(0, 4 - (product.images?.length || 0))).fill('https://placehold.co/200x200/f3f4f6/a1a1aa')].slice(0, 4).map((img, i) => (
+                                <div key={i} onClick={() => setMainImage(img)} className={`rounded-xl overflow-hidden aspect-square cursor-pointer border-2 transition-colors ${mainImage === img ? 'border-[var(--color-brand)]' : 'border-transparent'}`}>
+                                    <img src={img?.startsWith('http') ? img : 'https://placehold.co/200x200/f3f4f6/a1a1aa'} alt="" className="w-full h-full object-cover opacity-80 hover:opacity-100" />
                                 </div>
                             ))}
                         </div>
@@ -99,8 +104,8 @@ const ProductDetail = () => {
                                 </span>
                             </div>
                             <div className="flex items-center gap-1">
-                                {'★★★★★'.split('').map((s, i) => <span key={i} className={`text-sm ${i < Math.floor(product.rating || 5) ? 'text-yellow-400' : 'text-gray-200'}`}>{s}</span>)}
-                                <span className="text-xs text-gray-500 ml-1">({product.reviewCount || 18} reviews)</span>
+                                {'★★★★★'.split('').map((s, i) => <span key={i} className={`text-sm ${i < Math.floor(product.ratingsAverage || product.rating || 5) ? 'text-yellow-400' : 'text-gray-200'}`}>{s}</span>)}
+                                <span className="text-xs text-gray-500 ml-1">({product.reviews?.length || 0} reviews)</span>
                             </div>
                         </div>
 
@@ -110,10 +115,10 @@ const ProductDetail = () => {
                         </p>
 
                         <div className="flex items-baseline gap-3 mb-6">
-                            <span className="text-4xl font-bold text-gray-900">${product.price.toFixed(2)}</span>
+                            <span className="text-4xl font-bold text-gray-900">₹{product.price.toFixed(2)}</span>
                             {product.oldPrice && (
                                 <>
-                                    <span className="text-lg text-gray-400 line-through">${product.oldPrice.toFixed(2)}</span>
+                                    <span className="text-lg text-gray-400 line-through">₹{product.oldPrice.toFixed(2)}</span>
                                     <span className="text-sm font-bold text-[var(--color-brand)] bg-[#bcf0a3]/30 px-2 py-0.5 rounded">SAVE {Math.round((1 - product.price / product.oldPrice) * 100)}%</span>
                                 </>
                             )}
@@ -158,6 +163,152 @@ const ProductDetail = () => {
                             </button>
                         </div>
                     </div>
+                </div>
+
+                {/* Lower Section Tabs */}
+                <div className="mt-8 border-b border-gray-200">
+                    <nav className="-mb-px flex space-x-8">
+                        {['Description', 'Reviews', 'About the Artisan'].map((tab) => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm transition-colors ${activeTab === tab
+                                    ? 'border-[var(--color-brand)] text-[var(--color-brand)]'
+                                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                                    }`}
+                            >
+                                {tab} {tab === 'Reviews' && <span className="ml-1 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">{product.reviews?.length || 0}</span>}
+                            </button>
+                        ))}
+                    </nav>
+                </div>
+
+                <div className="py-8">
+                    {activeTab === 'Description' && (
+                        <div className="flex flex-col lg:flex-row gap-12">
+                            <div className="lg:w-2/3">
+                                <h3 className="text-xl font-bold text-gray-900 mb-4">Product Specifications</h3>
+                                <p className="text-gray-600 mb-8 leading-relaxed text-sm">
+                                    {product.description}
+                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex gap-4 items-start">
+                                        <div className="p-2 bg-[#f4fdf4] rounded-lg text-[var(--color-brand)]">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" /></svg>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 text-sm">Category</h4>
+                                            <p className="text-sm text-gray-500">{product.category}</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex gap-4 items-start">
+                                        <div className="p-2 bg-[#f4fdf4] rounded-lg text-[var(--color-brand)]">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 text-sm">Availability</h4>
+                                            <p className="text-sm text-gray-500">{product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex gap-4 items-start">
+                                        <div className="p-2 bg-[#f4fdf4] rounded-lg text-[var(--color-brand)]">
+                                            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 text-sm">Listed On</h4>
+                                            <p className="text-sm text-gray-500">{new Date(product.createdAt).toLocaleDateString()}</p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-white p-4 rounded-2xl border border-gray-100 shadow-sm flex gap-4 items-start">
+                                        <div className="p-2 bg-[#f4fdf4] rounded-lg text-[var(--color-brand)]">
+                                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
+                                        </div>
+                                        <div>
+                                            <h4 className="font-semibold text-gray-900 text-sm">Artisan</h4>
+                                            <p className="text-sm text-gray-500">{product.vendor?.storeProfile?.storeName || product.vendor?.name}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="lg:w-1/3">
+                                <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                                    <h3 className="text-lg font-bold text-gray-900 mb-4">Rating Summary</h3>
+                                    <div className="flex items-center gap-4 mb-6">
+                                        <span className="text-5xl font-black text-gray-900">{product.ratingsAverage ? product.ratingsAverage.toFixed(1) : (product.rating || 0).toFixed(1)}</span>
+                                        <div>
+                                            <div className="flex text-yellow-400 mb-1 text-sm">
+                                                {'★★★★★'.split('').map((s, i) => <span key={i} className={`text-sm ${i < Math.floor(product.ratingsAverage || product.rating || 0) ? 'text-yellow-400' : 'text-gray-200'}`}>{s}</span>)}
+                                            </div>
+                                            <span className="text-xs text-gray-500">Based on {product.reviews?.length || 0} reviews</span>
+                                        </div>
+                                    </div>
+                                    <div className="space-y-2 mb-6 text-sm">
+                                        {[5, 4, 3, 2, 1].map((star) => {
+                                            const count = product.reviews?.filter(r => Math.floor(r.rating) === star).length || 0;
+                                            const total = product.reviews?.length || 1;
+                                            const percent = product.reviews?.length > 0 ? Math.round((count / total) * 100) : 0;
+                                            return (
+                                                <div key={star} className="flex items-center gap-3">
+                                                    <span className="w-2 font-medium text-gray-600">{star}</span>
+                                                    <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+                                                        <div className="h-full bg-yellow-400 rounded-full" style={{ width: `${percent}%` }}></div>
+                                                    </div>
+                                                    <span className="w-8 text-right text-gray-500 text-xs">{percent}%</span>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                    <button className="w-full py-2.5 border-2 border-gray-200 rounded-full text-sm font-semibold text-gray-700 hover:border-gray-900 transition-colors">Write a Review</button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'Reviews' && (
+                        <div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-6">Customer Reviews</h3>
+                            <div className="space-y-8 max-w-4xl">
+                                {product.reviews && product.reviews.length > 0 ? (
+                                    product.reviews.map((review, idx) => (
+                                        <div key={idx} className="border-b border-gray-100 pb-8">
+                                            <div className="flex justify-between items-start mb-2">
+                                                <div className="flex items-center gap-3">
+                                                    <div className="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">
+                                                        {review.user?.name?.charAt(0).toUpperCase() || 'U'}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-semibold text-gray-900 text-sm">{review.user?.name || 'Customer'}</h4>
+                                                        <div className="flex text-yellow-400 text-xs">
+                                                            {'★★★★★'.split('').map((s, i) => <span key={i} className={`text-sm ${i < Math.floor(review.rating) ? 'text-yellow-400' : 'text-gray-200'}`}>{s}</span>)}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span className="text-xs text-gray-400">{new Date(review.createdAt).toLocaleDateString()}</span>
+                                            </div>
+                                            <p className="text-sm text-gray-600 mt-3">{review.comment}</p>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center py-10 bg-white border border-gray-100 rounded-2xl shadow-sm">
+                                        <p className="text-gray-500 font-medium">No reviews yet. Be the first to share your thoughts!</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'About the Artisan' && (
+                        <div className="flex flex-col md:flex-row gap-8 items-start">
+                            <img src={product.vendor?.storeProfile?.logo?.startsWith('http') ? product.vendor.storeProfile.logo : "https://ui-avatars.com/api/?name=" + (product.vendor?.storeProfile?.storeName || product.vendor?.name) + "&background=random"} alt="Artisan" className="w-32 h-32 rounded-full object-cover shadow-sm border border-gray-100" />
+                            <div>
+                                <h3 className="text-xl font-bold text-gray-900 mb-2">{product.vendor?.storeProfile?.storeName || product.vendor?.name || 'Earth & Fire Studio'}</h3>
+                                <p className="text-sm font-medium text-[var(--color-brand)] mb-3">Independent Creator</p>
+                                <p className="text-gray-600 text-sm leading-relaxed max-w-2xl">
+                                    {product.vendor?.storeProfile?.description || "This artisan has not added a bio yet. They prefer to let their beautiful handcrafted work speak for itself."}
+                                </p>
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

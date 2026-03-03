@@ -258,7 +258,7 @@ const Checkout = () => {
                                     <div className="flex-1 min-w-0">
                                         <h4 className="font-semibold text-gray-900 text-sm truncate">{item.title}</h4>
                                         <p className="text-xs text-[var(--color-brand)] mb-1">Variant: Default</p>
-                                        <p className="text-sm font-medium text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                                        <p className="text-sm font-medium text-gray-900">₹{(item.price * item.quantity).toFixed(2)}</p>
                                     </div>
                                 </div>
                             ))}
@@ -272,7 +272,7 @@ const Checkout = () => {
                         <div className="space-y-3 text-sm text-gray-600 mb-8 border-b border-gray-100 pb-8">
                             <div className="flex justify-between font-medium">
                                 <span>Subtotal</span>
-                                <span className="text-gray-900">${totalPrice.toFixed(2)}</span>
+                                <span className="text-gray-900">₹{totalPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex justify-between items-center text-[var(--color-brand)]">
                                 <span className="flex items-center gap-1">Shipping <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg></span>
@@ -287,8 +287,8 @@ const Checkout = () => {
                         <div className="flex justify-between items-end mb-8">
                             <span className="text-xl font-bold text-gray-900">Total</span>
                             <div className="flex items-baseline gap-2">
-                                <span className="text-xs text-gray-500 font-medium">USD</span>
-                                <span className="text-3xl font-black text-gray-900 leading-none">${totalAmount.toFixed(2)}</span>
+                                <span className="text-xs text-gray-500 font-medium">INR</span>
+                                <span className="text-3xl font-black text-gray-900 leading-none">₹{totalAmount.toFixed(2)}</span>
                             </div>
                         </div>
 

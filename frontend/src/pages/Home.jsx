@@ -62,6 +62,11 @@ const Home = () => {
         }));
     };
 
+    // Extract unique categories and one representative image from fetched products
+    const displayCategories = Array.from(
+        new Map(products.map(p => [p.category, p.images[0]])).entries()
+    ).map(([name, image]) => ({ name, image }));
+
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen bg-[var(--color-background-soft)]">
@@ -122,14 +127,21 @@ const Home = () => {
                     </Link>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                    {/* Placeholder for dynamic category list */}
-                    {[1, 2, 3, 4, 5, 6].map((i) => (
-                        <div key={i} className="group block cursor-pointer">
-                            <div className="rounded-2xl overflow-hidden bg-gray-100 mb-3 aspect-square relative animate-pulse"></div>
-                            <div className="h-4 bg-gray-200 rounded w-2/3 mb-1 animate-pulse"></div>
-                            <div className="h-3 bg-gray-100 rounded w-1/2 animate-pulse"></div>
+                    {displayCategories.length > 0 ? displayCategories.slice(0, 6).map((cat, idx) => (
+                        <div key={idx} className="group block cursor-pointer">
+                            <div className="rounded-2xl overflow-hidden bg-gray-100 mb-3 aspect-square relative">
+                                <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                            </div>
+                            <h3 className="text-center font-medium text-gray-900 group-hover:text-[var(--color-brand)] transition-colors">{cat.name}</h3>
                         </div>
-                    ))}
+                    )) : (
+                        [1, 2, 3, 4, 5, 6].map((i) => (
+                            <div key={i} className="group block cursor-pointer">
+                                <div className="rounded-2xl overflow-hidden bg-gray-100 mb-3 aspect-square relative animate-pulse"></div>
+                                <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto mb-1 animate-pulse"></div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
 
@@ -172,9 +184,9 @@ const Home = () => {
 
                                 <div className="flex items-center justify-between mt-2">
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-lg font-bold text-[var(--color-brand)]">${product.price.toFixed(2)}</span>
+                                        <span className="text-lg font-bold text-[var(--color-brand)]">₹{product.price.toFixed(2)}</span>
                                         {product.oldPrice && (
-                                            <span className="text-sm text-gray-400 line-through">${product.oldPrice.toFixed(2)}</span>
+                                            <span className="text-sm text-gray-400 line-through">₹{product.oldPrice.toFixed(2)}</span>
                                         )}
                                     </div>
                                     <button

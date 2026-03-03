@@ -108,7 +108,7 @@ const SellerDashboard = () => {
                                 <div className="ml-5 w-0 flex-1">
                                     <dl>
                                         <dt className="text-sm font-medium text-gray-400 truncate tracking-wide">Total Earnings</dt>
-                                        <dd className="text-3xl font-bold text-white tracking-tight">${stats.totalSales.toFixed(2)}</dd>
+                                        <dd className="text-3xl font-bold text-white tracking-tight">₹{stats.totalSales.toFixed(2)}</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ const SellerDashboard = () => {
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${product.price.toFixed(2)}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-300">₹{product.price.toFixed(2)}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${product.stock > 0 ? 'bg-[#32d74b]/10 text-[#32d74b]' : 'bg-[#ff453a]/10 text-[#ff453a]'}`}>
                                                             {product.stock > 0 ? `${product.stock} In Stock` : 'Out of Stock'}
@@ -229,7 +229,7 @@ const SellerDashboard = () => {
                                                 <tr key={order._id} className="hover:bg-[#1c1c1e]/50 transition-colors">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-[#0a84ff]">#{order._id.substring(0, 8)}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{new Date(order.createdAt).toLocaleDateString()}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">${order.totalAmount.toFixed(2)}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-white">₹{order.totalAmount.toFixed(2)}</td>
                                                     <td className="px-6 py-4 whitespace-nowrap">
                                                         <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${order.isPaid ? 'bg-[#32d74b]/10 text-[#32d74b]' : 'bg-yellow-500/10 text-yellow-500'}`}>
                                                             {order.isPaid ? 'Paid' : 'Pending'}

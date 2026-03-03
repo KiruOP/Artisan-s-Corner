@@ -43,7 +43,7 @@ const Navbar = () => {
 
                     {/* Middle: Links  */}
                     <div className="hidden md:flex items-center space-x-8">
-                        <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
+                        <Link to="/shop" className="text-gray-600 hover:text-gray-900 font-medium">Shop</Link>
                         <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">Stories</Link>
                         <Link to="/" className="text-gray-600 hover:text-gray-900 font-medium">About Us</Link>
                         {user?.roles?.includes('buyer') && !user?.roles?.includes('vendor') && (

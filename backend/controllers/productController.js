@@ -1,13 +1,15 @@
 import Product from '../models/Product.js';
+import Review from '../models/Review.js';
 
 // @desc    Get all products
 // @route   GET /api/products
 // @access  Public
 export const getProducts = async (req, res) => {
     try {
-        const products = await Product.find({}).populate('vendor', 'name storeProfile.storeName');
+        const products = await Product.find({}).populate('vendor', 'name storeProfile.storeName').exec();
         res.json(products);
     } catch (error) {
+        console.error('getProducts Error:', error.message);
         res.status(500).json({ message: error.message });
     }
 };
@@ -17,10 +19,17 @@ export const getProducts = async (req, res) => {
 // @access  Public
 export const getProductById = async (req, res) => {
     try {
-        const product = await Product.findById(req.params.id).populate('vendor', 'name storeProfile.storeName');
+        const product = await Product.findById(req.params.id)
+            .populate('vendor', 'name email storeProfile')
+            .lean();
 
         if (product) {
-            res.json(product);
+            // Fetch associated reviews
+            const reviews = await Review.find({ product: req.params.id })
+                .populate('user', 'name')
+                .lean();
+
+            res.json({ ...product, reviews });
         } else {
             res.status(404).json({ message: 'Product not found' });
         }

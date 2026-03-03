@@ -57,7 +57,7 @@ const Cart = () => {
                                 <div className="flex-grow flex flex-col w-full">
                                     <div className="flex justify-between items-start mb-2">
                                         <h3 className="text-xl font-bold text-gray-900 truncate pr-4">{item.title}</h3>
-                                        <span className="text-xl font-bold text-gray-900 flex-shrink-0">${(item.price * item.quantity).toFixed(2)}</span>
+                                        <span className="text-xl font-bold text-gray-900 flex-shrink-0">₹{(item.price * item.quantity).toFixed(2)}</span>
                                     </div>
                                     <p className="text-gray-500 text-sm mb-1">Color/Variant Name</p>
                                     <p className="text-sm font-medium text-[var(--color-brand)] flex items-center gap-1.5 mb-6">
@@ -97,15 +97,15 @@ const Cart = () => {
                             <div className="space-y-4 text-gray-600 mb-8 border-b border-gray-100 pb-8">
                                 <div className="flex justify-between font-medium">
                                     <span>Subtotal ({items.reduce((a, c) => a + c.quantity, 0)} items)</span>
-                                    <span>${totalPrice.toFixed(2)}</span>
+                                    <span>₹{totalPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between items-center text-gray-500">
                                     <span className="flex items-center gap-1">Platform Fee (5%) <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" /></svg></span>
-                                    <span>${platformFee.toFixed(2)}</span>
+                                    <span>₹{platformFee.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between text-gray-500">
                                     <span>Shipping estimate</span>
-                                    <span>${shipping.toFixed(2)}</span>
+                                    <span>₹{shipping.toFixed(2)}</span>
                                 </div>
                             </div>
 
@@ -117,8 +117,8 @@ const Cart = () => {
                             <div className="flex justify-between items-end mb-8">
                                 <span className="text-xl font-bold text-gray-900">Total</span>
                                 <div className="text-right">
-                                    <span className="text-3xl font-black text-gray-900 block leading-none mb-1">${totalAmount.toFixed(2)}</span>
-                                    <span className="text-xs text-gray-400">USD including taxes</span>
+                                    <span className="text-3xl font-black text-gray-900 block leading-none mb-1">₹{totalAmount.toFixed(2)}</span>
+                                    <span className="text-xs text-gray-400">INR including taxes</span>
                                 </div>
                             </div>
 
