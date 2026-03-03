@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { clearCart } from '../redux/cartSlice';
+import { useToast } from '../context/ToastContext';
 
 const Checkout = () => {
     const { items, totalPrice } = useSelector((state) => state.cart);
     const { user, token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { success, info } = useToast();
 
     const [shippingAddress, setShippingAddress] = useState({
         address: '',
@@ -53,13 +55,13 @@ const Checkout = () => {
 
             await axios.post('http://localhost:5000/api/orders', orderData, config);
 
-            alert('Order Placed Successfully! Mock Stripe integration executed.');
+            success('Order Placed Successfully! (Mock Stripe Executed)');
             dispatch(clearCart());
             navigate('/');
         } catch (error) {
             console.warn("Backend unavailable. Simulating clear cart.");
             // Offline mock flow
-            alert('Order Placed Successfully! (Offline Mock Mode)');
+            info('Order Placed Successfully! (Offline Mock Mode)');
             dispatch(clearCart());
             navigate('/');
         } finally {
@@ -138,7 +140,6 @@ const Checkout = () => {
                     <p className="text-[var(--color-brand)] mb-8 font-medium">Where should we send your handcrafted goods?</p>
 
                     <form onSubmit={placeOrderHandler} id="checkout-form" className="space-y-6">
-                        {errorMsg && <div className="p-3 bg-red-100 text-red-700 rounded-xl mb-4 text-sm">{errorMsg}</div>}
 
                         {/* Contact Details Card */}
                         <div className="bg-white border border-gray-100 rounded-3xl p-6 sm:p-8 shadow-sm">

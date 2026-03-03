@@ -4,11 +4,6 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
 
-const MOCK_PRODUCTS = [
-    { _id: 'm1', title: 'Azure Mist Ceramic Vase', description: 'Hand-thrown stoneware vase featuring our signature Azure Mist glaze. Each piece is unique, showcasing subtle variations in color and texture that tell the story of its creation. Perfect for dried arrangements or fresh blooms.\n\nThe Azure Mist Ceramic Vase is a testament to the beauty of imperfection. Hand-thrown on a potter\'s wheel, this vase undergoes a unique double-glazing process. First, a deep cobalt base is applied, followed by a lighter, milky overglaze that reacts in the kiln to create the misty, ethereal effect.', price: 85.00, oldPrice: 110.00, images: ['https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&q=80&w=800'], vendor: { _id: 'v1', name: 'Earth & Fire Studio', storeProfile: { storeName: 'Earth & Fire Studio' } }, category: 'Ceramics', rating: 4.8, reviewCount: 128, stock: 12 },
-    // ... other mocks can be mapped accordingly
-];
-
 const ProductDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -23,11 +18,7 @@ const ProductDetail = () => {
                 const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
                 setProduct(data);
             } catch (error) {
-                console.warn("Backend unavailable. Searching local mocks.");
-                const mockMatch = MOCK_PRODUCTS.find(p => p._id === id) || MOCK_PRODUCTS[0];
-                if (mockMatch) {
-                    setProduct(mockMatch);
-                }
+                console.error("Backend unavailable. Unable to fetch product detail.");
             } finally {
                 setLoading(false);
             }
@@ -65,7 +56,7 @@ const ProductDetail = () => {
                 <nav className="flex text-sm text-gray-500 space-x-2">
                     <Link to="/" className="hover:text-gray-900">Home</Link>
                     <span>/</span>
-                    <Link to={`/category/${product.category.toLowerCase()}`} className="hover:text-gray-900">{product.category}</Link>
+                    <Link to="/" className="hover:text-gray-900">{product.category}</Link>
                     <span>/</span>
                     <span className="text-gray-900 font-medium truncate">{product.title}</span>
                 </nav>

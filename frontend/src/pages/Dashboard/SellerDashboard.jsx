@@ -45,26 +45,8 @@ const SellerDashboard = () => {
                 });
 
             } catch (error) {
-                console.warn('Backend unavailable. Loading Mock Dashboard.', error);
-                setErrorMsg('Operating in Offline Demo Mode. Displaying showcase data.');
-
-                // Offline Mock Data
-                const mockProducts = [
-                    { _id: 'mp1', title: 'Example Ceramic Bowl', price: 42.00, stock: 15, category: 'Home Decor' },
-                    { _id: 'mp2', title: 'Hand-poured Candle', price: 25.00, stock: 40, category: 'Lifestyle' }
-                ];
-
-                const mockOrders = [
-                    { _id: 'mo1', totalAmount: 67.00, isPaid: true, createdAt: new Date().toISOString() }
-                ];
-
-                setProducts(mockProducts);
-                setOrders(mockOrders);
-                setStats({
-                    totalSales: 63.65, // 95% of 67
-                    totalOrders: 1,
-                    totalProducts: 2,
-                });
+                console.error('Backend unavailable. Dashboard failed to load.', error);
+                setErrorMsg('Unable to fetch dashboard data. Please check your connection.');
             } finally {
                 setLoading(false);
             }

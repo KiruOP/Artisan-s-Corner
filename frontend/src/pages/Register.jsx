@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, loginFail } from '../redux/authSlice';
 import axios from 'axios';
+import { useToast } from '../context/ToastContext';
 
 const Register = () => {
     const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
-    const [localError, setLocalError] = useState('');
+    const { success, error } = useToast();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user, isError, message } = useSelector((state) => state.auth);
@@ -26,9 +27,9 @@ const Register = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        setLocalError('');
         if (formData.password !== formData.confirmPassword) {
             dispatch(loginFail('Passwords do not match'));
+            error('Passwords do not match');
             return;
         }
 
@@ -41,20 +42,14 @@ const Register = () => {
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
                 dispatch(loginSuccess(response.data));
+                success("Account created successfully!");
                 navigate('/');
             }
-        } catch (error) {
-            console.warn("Backend Registration Failed", error);
-            if (error.code === 'ERR_NETWORK') {
-                // Mock Registration logic
-                const mockBuyer = { _id: 'b2', name: formData.name, email: formData.email, roles: ['buyer'], token: 'mock-token-buyer-new' };
-                localStorage.setItem('user', JSON.stringify(mockBuyer));
-                dispatch(loginSuccess(mockBuyer));
-                navigate('/');
-                return;
-            }
-            const msg = error.response?.data?.message || error.message;
+        } catch (err) {
+            console.error("Backend Registration Failed", err);
+            const msg = err.response?.data?.message || 'Registration failed due to network error.';
             dispatch(loginFail(msg));
+            error(msg);
         }
     };
 
@@ -72,12 +67,6 @@ const Register = () => {
                         Join the Artisan's Corner community
                     </p>
                 </div>
-
-                {(isError || localError) && (
-                    <div className="bg-red-50 border border-red-100 rounded-2xl p-4 mb-4 text-center">
-                        <p className="text-sm text-red-600 font-medium">{localError || message}</p>
-                    </div>
-                )}
 
                 <form className="mt-8 space-y-6" onSubmit={onSubmit}>
                     <div className="space-y-5">

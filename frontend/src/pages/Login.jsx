@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess, loginFail } from '../redux/authSlice';
 import axios from 'axios';
+import { useToast } from '../context/ToastContext';
 
 const Login = () => {
     const [formData, setFormData] = useState({ email: '', password: '' });
-    const [localError, setLocalError] = useState('');
+    const { success, error } = useToast();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { user, isError, message } = useSelector((state) => state.auth);
@@ -26,37 +27,19 @@ const Login = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        setLocalError('');
         try {
             const response = await axios.post('http://localhost:5000/api/users/login', formData);
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
                 dispatch(loginSuccess(response.data));
+                success("Welcome back!");
                 navigate('/');
             }
-        } catch (error) {
-            console.warn("Backend Login Failed", error);
-            // Mock logic fallback for Demo
-            if (error.code === 'ERR_NETWORK') {
-                if (formData.email === 'buyer@test.com' && formData.password === 'password123') {
-                    const mockBuyer = { _id: 'b1', name: 'Test Buyer', email: 'buyer@test.com', roles: ['buyer'], token: 'mock-token-buyer' };
-                    localStorage.setItem('user', JSON.stringify(mockBuyer));
-                    dispatch(loginSuccess(mockBuyer));
-                    navigate('/');
-                    return;
-                } else if (formData.email === 'vendor@test.com' && formData.password === 'password123') {
-                    const mockVendor = { _id: 'v1', name: 'Test Vendor', email: 'vendor@test.com', roles: ['buyer', 'vendor'], storeProfile: { storeName: 'Test Vendor Store' }, token: 'mock-token-vendor' };
-                    localStorage.setItem('user', JSON.stringify(mockVendor));
-                    dispatch(loginSuccess(mockVendor));
-                    navigate('/');
-                    return;
-                }
-                setLocalError('Network error connecting to backend. Use buyer@test.com / password123 for local demo.');
-                return;
-            }
-
-            const msg = error.response?.data?.message || error.message;
+        } catch (err) {
+            console.error("Backend Login Failed", err);
+            const msg = err.response?.data?.message || 'Login failed';
             dispatch(loginFail(msg));
+            error(msg);
         }
     };
 
@@ -74,12 +57,6 @@ const Login = () => {
                         Sign in to access your artisan account
                     </p>
                 </div>
-
-                {(isError || localError) && (
-                    <div className="bg-red-50 border border-red-100 rounded-2xl p-4 mb-4 text-center">
-                        <p className="text-sm text-red-600 font-medium">{localError || message}</p>
-                    </div>
-                )}
 
                 <form className="mt-8 space-y-6" onSubmit={onSubmit}>
                     <div className="space-y-5">
