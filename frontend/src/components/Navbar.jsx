@@ -10,8 +10,8 @@ const Navbar = () => {
     const { items } = useSelector((state) => state.cart);
     const location = useLocation();
 
-    if (location.pathname === '/checkout') {
-        return null; // The Checkout page provides its own minimal header
+    if (location.pathname === '/checkout' || location.pathname.startsWith('/dashboard')) {
+        return null; // The Checkout and Dashboard pages provide their own navigation headers
     }
 
     const onLogout = () => {

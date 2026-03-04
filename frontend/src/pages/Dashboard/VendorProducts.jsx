@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import VendorLayout from './VendorLayout';
 
 const VendorProducts = () => {
     const { user } = useSelector((state) => state.auth);
     const token = user?.token;
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filter, setFilter] = useState('all');
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -28,6 +30,13 @@ const VendorProducts = () => {
     const activeCount = products.filter(p => p.stock > 0).length;
     const outOfStockCount = products.filter(p => p.stock === 0).length;
 
+    const filteredProducts = products.filter(p => {
+        if (filter === 'active') return p.stock > 0;
+        if (filter === 'outOfStock') return p.stock === 0;
+        if (filter === 'drafts') return false; // Not implemented yet
+        return true; // 'all'
+    });
+
     if (loading) {
         return (
             <div className="flex justify-center items-center h-screen bg-[#f8f9fa]">
@@ -37,59 +46,13 @@ const VendorProducts = () => {
     }
 
     return (
-        <div className="bg-[#f8f9fa] min-h-screen pb-12">
+        <VendorLayout title="My Products" subtitle="Manage your inventory, pricing, and stock levels.">
 
-            {/* Vendor Navbar Alternative (Mimicking the Dashboard navigation) */}
-            <header className="bg-white border-b border-gray-100 py-3 px-4 sm:px-8 sticky top-0 z-10 hidden sm:block">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <div className="flex items-center gap-6">
-                        <Link to="/" className="flex items-center gap-2">
-                            <div className="w-8 h-8 bg-green-500 text-white rounded-[10px] flex items-center justify-center">
-                                <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 13h2v6h-2zm0 8h2v2h-2z" fillOpacity="0" /><path d="M12 3L4 9v12h16V9l-8-6zm0 2.5l6 4.5v9H6v-9l6-4.5z" /><circle cx="12" cy="14" r="3" /></svg>
-                            </div>
-                            <span className="text-xl font-bold tracking-tight text-gray-900">Artisan's Corner</span>
-                        </Link>
-                        <div className="relative w-64">
-                            <input type="text" placeholder="Search products, orders..." className="w-full bg-gray-50 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-green-500" />
-                            <svg className="w-4 h-4 text-gray-400 absolute left-4 top-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                        </div>
-                    </div>
-
-                    <div className="flex items-center gap-6 text-sm font-semibold">
-                        <Link to="/dashboard/seller" className="text-gray-500 hover:text-gray-900 transition-colors">Dashboard</Link>
-                        <Link to="/dashboard/seller" className="text-gray-500 hover:text-gray-900 transition-colors">Orders</Link>
-                        <Link to="/dashboard/products" className="text-green-600 border-b-2 border-green-600 py-4 -mb-[18px]">Products</Link>
-                        <Link to="/dashboard/seller" className="text-gray-500 hover:text-gray-900 transition-colors">Earnings</Link>
-
-                        <div className="flex items-center gap-4 border-l border-gray-200 pl-6 ml-2">
-                            <button className="text-gray-400 hover:text-gray-600 relative">
-                                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                                <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
-                            </button>
-                            <div className="w-8 h-8 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
-                                {user?.storeProfile?.logo !== 'no-photo.jpg' && user?.storeProfile?.logo ?
-                                    <img src={user.storeProfile.logo} className="w-full h-full object-cover" alt="store" /> :
-                                    <span className="w-full h-full flex items-center justify-center text-xs font-bold text-gray-500">US</span>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* Mobile Return link */}
-            <div className="sm:hidden p-4 bg-white border-b">
-                <Link to="/dashboard/seller" className="text-green-600 font-medium text-sm flex items-center gap-1">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg> Dashboard
-                </Link>
-            </div>
-
-            <main className="max-w-7xl mx-auto px-4 sm:px-8 pt-8">
+            <div className="max-w-7xl mx-auto pt-4">
 
                 <div className="flex flex-col sm:flex-row justify-between sm:items-end mb-8 gap-4">
                     <div>
-                        <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">My Products</h1>
-                        <p className="text-green-600 mt-1 font-medium">Manage your inventory, pricing, and stock levels.</p>
+                        {/* Title and subtitle are now handled by VendorLayout */}
                     </div>
                     <Link to="/dashboard/products/new" className="inline-flex items-center justify-center px-6 py-2.5 bg-[#49cc2f] hover:bg-[#3fb826] text-white font-bold rounded-full shadow-sm transition-colors w-full sm:w-auto">
                         <svg className="w-5 h-5 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 4v16m8-8H4" /></svg>
@@ -100,17 +63,17 @@ const VendorProducts = () => {
                 <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
                     {/* Status Tabs */}
                     <div className="flex flex-wrap items-center gap-2 sm:gap-6 bg-white border border-gray-100 rounded-full px-2 py-1.5 shadow-sm text-sm font-semibold text-gray-500 overflow-x-auto w-full lg:w-auto">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-[#dcfce7] text-green-800 rounded-full whitespace-nowrap">
-                            All Products <span className="bg-green-700 text-white text-[10px] px-2 py-0.5 rounded-full">{products.length}</span>
+                        <button onClick={() => setFilter('all')} className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${filter === 'all' ? 'bg-[#dcfce7] text-green-800' : 'hover:bg-gray-50'}`}>
+                            All Products <span className={`${filter === 'all' ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-600'} text-[10px] px-2 py-0.5 rounded-full`}>{products.length}</span>
                         </button>
-                        <button className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full transition-colors whitespace-nowrap">
-                            Active <span className="bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded-full">{activeCount}</span>
+                        <button onClick={() => setFilter('active')} className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${filter === 'active' ? 'bg-[#dcfce7] text-green-800' : 'hover:bg-gray-50'}`}>
+                            Active <span className={`${filter === 'active' ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-600'} text-[10px] px-2 py-0.5 rounded-full`}>{activeCount}</span>
                         </button>
-                        <button className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full transition-colors whitespace-nowrap">
-                            Drafts <span className="bg-gray-100 text-gray-600 text-[10px] px-2 py-0.5 rounded-full">0</span>
+                        <button onClick={() => setFilter('drafts')} className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${filter === 'drafts' ? 'bg-[#dcfce7] text-green-800' : 'hover:bg-gray-50'}`}>
+                            Drafts <span className={`${filter === 'drafts' ? 'bg-green-700 text-white' : 'bg-gray-100 text-gray-600'} text-[10px] px-2 py-0.5 rounded-full`}>0</span>
                         </button>
-                        <button className="flex items-center gap-2 px-4 py-2 hover:bg-gray-50 rounded-full transition-colors whitespace-nowrap text-red-500">
-                            Out of Stock <span className="bg-red-100 text-red-600 text-[10px] px-2 py-0.5 rounded-full">{outOfStockCount}</span>
+                        <button onClick={() => setFilter('outOfStock')} className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${filter === 'outOfStock' ? 'bg-red-100 text-red-800' : 'hover:bg-gray-50 text-red-500'}`}>
+                            Out of Stock <span className={`${filter === 'outOfStock' ? 'bg-red-700 text-white' : 'bg-red-100 text-red-600'} text-[10px] px-2 py-0.5 rounded-full`}>{outOfStockCount}</span>
                         </button>
                     </div>
 
@@ -140,7 +103,7 @@ const VendorProducts = () => {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50">
-                                {products.map((p, idx) => (
+                                {filteredProducts.map((p, idx) => (
                                     <tr key={p._id} className="hover:bg-gray-50/50 transition-colors group">
                                         <td className="px-6 py-4 pl-8">
                                             <div className="flex items-center gap-4">
@@ -182,7 +145,7 @@ const VendorProducts = () => {
                         {/* Pagination Footer */}
                         <div className="border-t border-gray-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                             <div className="text-sm font-medium text-green-600">
-                                Showing <span className="font-bold text-gray-900">1-{products.length}</span> of <span className="font-bold text-gray-900">{products.length}</span> products
+                                Showing <span className="font-bold text-gray-900">1-{filteredProducts.length}</span> of <span className="font-bold text-gray-900">{filteredProducts.length}</span> products
                             </div>
                             <div className="flex items-center gap-1">
                                 <button className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-900"><svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg></button>
@@ -196,8 +159,8 @@ const VendorProducts = () => {
                     </div>
                 </div>
 
-            </main>
-        </div>
+            </div>
+        </VendorLayout>
     );
 };
 
