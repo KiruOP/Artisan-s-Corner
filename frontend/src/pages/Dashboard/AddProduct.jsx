@@ -58,7 +58,7 @@ const AddProduct = () => {
                 }
             };
 
-            await axios.post('http://localhost:5000/api/products', formDataPayload, config);
+            await axios.post('https://artisans-backend-9zxt.onrender.com/api/products', formDataPayload, config);
 
             success('Product added successfully!');
             navigate('/dashboard/products');
@@ -266,3 +266,4 @@ const AddProduct = () => {
 };
 
 export default AddProduct;
+

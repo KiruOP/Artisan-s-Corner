@@ -16,12 +16,12 @@ const OrderConfirmation = () => {
             try {
                 if (id && id !== 'success') {
                     const config = { headers: { Authorization: `Bearer ${token}` } };
-                    const res = await axios.get(`http://localhost:5000/api/orders/${id}`, config);
+                    const res = await axios.get(`https://artisans-backend-9zxt.onrender.com/api/orders/${id}`, config);
                     setOrder(res.data);
                 }
 
                 // Fetch suggestions
-                const prodRes = await axios.get('http://localhost:5000/api/products');
+                const prodRes = await axios.get('https://artisans-backend-9zxt.onrender.com/api/products');
                 // Just grab 3 random or top products for suggestions
                 if (prodRes.data && prodRes.data.length > 0) {
                     setSuggestions(prodRes.data.slice(0, 3));
@@ -157,3 +157,4 @@ const OrderConfirmation = () => {
 };
 
 export default OrderConfirmation;
+

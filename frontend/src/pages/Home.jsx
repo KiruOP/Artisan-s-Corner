@@ -16,7 +16,7 @@ const Home = () => {
         const fetchProducts = async () => {
             setLoading(true);
             try {
-                const { data } = await axios.get('http://localhost:5000/api/products');
+                const { data } = await axios.get('https://artisans-backend-9zxt.onrender.com/api/products');
                 setProducts(data);
             } catch (error) {
                 console.error("Products Fetch Error:", error);
@@ -37,7 +37,7 @@ const Home = () => {
         }
 
         try {
-            await axios.post('http://localhost:5000/api/subscribers', { email });
+            await axios.post('https://artisans-backend-9zxt.onrender.com/api/subscribers', { email });
             setSubscribeStatus({ type: 'success', message: 'Success! You are now subscribed.' });
             setEmail('');
             setTimeout(() => setSubscribeStatus({ type: '', message: '' }), 4000);
@@ -238,3 +238,4 @@ const Home = () => {
 };
 
 export default Home;
+

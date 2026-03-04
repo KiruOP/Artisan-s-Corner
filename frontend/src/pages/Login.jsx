@@ -28,7 +28,7 @@ const Login = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/users/login', formData);
+            const response = await axios.post('https://artisans-backend-9zxt.onrender.com/api/users/login', formData);
             if (response.data) {
                 localStorage.setItem('user', JSON.stringify(response.data));
                 dispatch(loginSuccess(response.data));
@@ -110,3 +110,4 @@ const Login = () => {
 };
 
 export default Login;
+

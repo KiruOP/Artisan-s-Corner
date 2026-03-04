@@ -15,7 +15,7 @@ const VendorProducts = () => {
         const fetchProducts = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const res = await axios.get('http://localhost:5000/api/products/vendor/me', config);
+                const res = await axios.get('https://artisans-backend-9zxt.onrender.com/api/products/vendor/me', config);
                 setProducts(res.data);
             } catch (error) {
                 console.error('Failed to fetch vendor products', error);
@@ -165,3 +165,4 @@ const VendorProducts = () => {
 };
 
 export default VendorProducts;
+

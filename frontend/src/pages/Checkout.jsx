@@ -54,7 +54,7 @@ const Checkout = () => {
                 shippingAddress,
             };
 
-            const res = await axios.post('http://localhost:5000/api/orders', orderData, config);
+            const res = await axios.post('https://artisans-backend-9zxt.onrender.com/api/orders', orderData, config);
 
             success('Order Placed Successfully!');
             dispatch(clearCart());
@@ -334,3 +334,4 @@ const Checkout = () => {
 };
 
 export default Checkout;
+

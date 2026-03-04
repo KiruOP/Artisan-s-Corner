@@ -92,3 +92,4 @@ const VendorLayout = ({ children, title, subtitle }) => {
 };
 
 export default VendorLayout;
+

@@ -17,7 +17,7 @@ const VendorOrders = () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 // Using the specific vendor orders endpoint to pull the vendor's subset of sales
-                const res = await axios.get('http://localhost:5000/api/orders/vendor', config);
+                const res = await axios.get('https://artisans-backend-9zxt.onrender.com/api/orders/vendor', config);
                 setOrders(res.data);
             } catch (error) {
                 console.error('Failed to fetch vendor orders', error);
@@ -158,3 +158,4 @@ const VendorOrders = () => {
 };
 
 export default VendorOrders;
+

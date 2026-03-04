@@ -29,7 +29,7 @@ const VendorSetup = () => {
             };
 
             const res = await axios.post(
-                'http://localhost:5000/api/users/become-vendor',
+                'https://artisans-backend-9zxt.onrender.com/api/users/become-vendor',
                 { storeName, description },
                 config
             );
@@ -160,3 +160,4 @@ const VendorSetup = () => {
 };
 
 export default VendorSetup;
+

@@ -23,8 +23,8 @@ const SellerDashboard = () => {
                 const config = { headers: { Authorization: `Bearer ${user.token}` } };
 
                 const [productsRes, ordersRes] = await Promise.all([
-                    axios.get('http://localhost:5000/api/products/vendor/me', config),
-                    axios.get('http://localhost:5000/api/orders/vendor/me', config)
+                    axios.get('https://artisans-backend-9zxt.onrender.com/api/products/vendor/me', config),
+                    axios.get('https://artisans-backend-9zxt.onrender.com/api/orders/vendor/me', config)
                 ]);
 
                 const fetchedProducts = productsRes.data;
@@ -255,3 +255,4 @@ const SellerDashboard = () => {
 };
 
 export default SellerDashboard;
+

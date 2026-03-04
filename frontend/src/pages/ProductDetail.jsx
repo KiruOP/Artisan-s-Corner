@@ -17,7 +17,7 @@ const ProductDetail = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const { data } = await axios.get(`http://localhost:5000/api/products/${id}`);
+                const { data } = await axios.get(`https://artisans-backend-9zxt.onrender.com/api/products/${id}`);
                 setProduct(data);
                 if (data.images && data.images.length > 0) {
                     setMainImage(data.images[0]);
@@ -316,3 +316,4 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
