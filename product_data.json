@@ -1,0 +1,782 @@
+[
+  {
+    "title": "Velvet Throw Pillow",
+    "price": 24.99,
+    "description": "Soft velvet decorative pillow with gold zipper, perfect for sofa or bed styling.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/gpdk6nn8fc4qzhqpzztd.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 312,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Boho Macrame Wall Hanging",
+    "price": 39.99,
+    "description": "Hand-knotted cotton macrame wall art, adds a bohemian touch to any room.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/mzh2tl6zexgdlzlixnzi.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 198,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Scented Soy Candle Set",
+    "price": 29.99,
+    "description": "Set of 3 hand-poured soy candles in lavender, vanilla, and sandalwood scents.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/dayudku23cg21lcblbzd.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 547,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Geometric Metal Wall Art",
+    "price": 59.99,
+    "description": "Modern laser-cut steel geometric wall sculpture, powder-coated matte black.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/pixsw9l9w5tb2pgodjoy.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 134,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Woven Jute Area Rug",
+    "price": 89.99,
+    "description": "Natural jute rug with diamond weave pattern, eco-friendly and durable.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/fjdf3z21mmdcj6luvhvs.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.4,
+    "numReviews": 276,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Terracotta Flower Pot Set",
+    "price": 34.99,
+    "description": "Set of 3 handcrafted terracotta pots with drainage holes and matching saucers.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/mre4o9pcrcv3nftafzgz.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 421,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Wooden Photo Frame Trio",
+    "price": 22.99,
+    "description": "Set of 3 rustic wooden frames in 4x6, 5x7, and 8x10 sizes.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/qlu97ir0zvmf83r5kagi.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.3,
+    "numReviews": 183,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Fairy Light String Set",
+    "price": 18.99,
+    "description": "20ft warm white LED fairy lights with timer function, battery-powered.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/fwlsum1rpovcsywrof42.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 689,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Bamboo Shelf Unit",
+    "price": 74.99,
+    "description": "3-tier floating bamboo wall shelf for plants and decor, easy to install.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/ijlxig3hindvz7bhei2y.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 95,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Linen Curtain Panel Pair",
+    "price": 49.99,
+    "description": "Semi-sheer linen curtains with grommet top, available in 84-inch length.",
+    "category": "Home Decor",
+    "images": [
+      "/mock_images/s1p3qiz0mosk09x3oznq.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 302,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Gold Layered Necklace Set",
+    "price": 32.99,
+    "description": "Three delicate 18k gold-plated chain necklaces in varying lengths.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/l7gdlgxdro2iuzkaiuks.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 458,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Crystal Stud Earrings",
+    "price": 19.99,
+    "description": "Hypoallergenic sterling silver studs with faceted cubic zirconia stones.",
+    "category": "Jewelry",
+    "images": [
+      "https://images.unsplash.com/photo-1573408301185-9519f94816b5"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 621,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Boho Beaded Bracelet Set",
+    "price": 24.99,
+    "description": "Set of 5 handmade beaded bracelets with natural stones and gold accents.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/i6q94cdcrcsz3smo3ynp.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 387,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Moonstone Ring",
+    "price": 44.99,
+    "description": "Adjustable sterling silver ring with genuine rainbow moonstone centerpiece.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/hudwj0mnxmtn05ncfasl.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 214,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Minimalist Hoop Earrings",
+    "price": 15.99,
+    "description": "Thin 14k gold-filled small hoop earrings, lightweight and comfortable.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/xixpfdumbrtlevqokwak.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 532,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Turquoise Pendant Necklace",
+    "price": 27.99,
+    "description": "Natural turquoise stone set in oxidized silver with 18-inch chain.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/nfehrnn0rhlmfjiihtpn.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 178,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Pearl Drop Earrings",
+    "price": 36.99,
+    "description": "Freshwater pearl dangle earrings with gold-filled hooks, elegant design.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/krzke7fuzlg5bzruwbwr.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 293,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Charm Bracelet",
+    "price": 29.99,
+    "description": "Sterling silver link bracelet with 5 interchangeable charms included.",
+    "category": "Jewelry",
+    "images": [
+      "https://images.unsplash.com/photo-1601121141418-1a60cbf9f5e9"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 341,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Enamel Flower Ring",
+    "price": 22.99,
+    "description": "Colorful hand-painted enamel daisy ring in adjustable size, nickel-free.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/vihhfz3z8ravqnkxyc5k.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.4,
+    "numReviews": 156,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Birthstone Pendant",
+    "price": 39.99,
+    "description": "Personalized gold-plated pendant with genuine birthstone, gift-boxed.",
+    "category": "Jewelry",
+    "images": [
+      "/mock_images/mucfqg4e8hsb01j7uvso.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 412,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Linen Wrap Dress",
+    "price": 54.99,
+    "description": "Flowy linen-blend wrap dress with tie waist, perfect for summer days.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/bz0oxoxg03ggeooft5c0.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 287,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Classic White Cotton Tee",
+    "price": 22.99,
+    "description": "Premium 100% organic cotton crewneck t-shirt, pre-shrunk and breathable.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/evxefl1xfgalg9lmpha5.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 743,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "High-Waist Denim Jeans",
+    "price": 64.99,
+    "description": "Vintage-wash high-waist straight-leg jeans with stretch cotton blend.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/ufzj8ta5t02xvyrytwff.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 512,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Oversized Knit Sweater",
+    "price": 49.99,
+    "description": "Chunky cable-knit oversized sweater in oatmeal, cozy and warm.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/ucuibni6kzb5bmr0p4tx.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 334,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Floral Midi Skirt",
+    "price": 38.99,
+    "description": "Chiffon floral midi skirt with elastic waist, fully lined.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/entsdqytygzk3v0v6tkn.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 198,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Linen Blazer",
+    "price": 79.99,
+    "description": "Unstructured linen blazer in cream, perfect for smart-casual looks.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/xsmd0outppubwkl5tpgx.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 156,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Graphic Hoodie",
+    "price": 44.99,
+    "description": "Heavyweight cotton fleece hoodie with vintage-style print, unisex fit.",
+    "category": "Clothing",
+    "images": [
+      "https://images.unsplash.com/photo-1556821840-3a63f15732ce"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 489,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Wide-Leg Trousers",
+    "price": 52.99,
+    "description": "High-rise wide-leg trousers in crepe fabric, professional and stylish.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/s81qzowontolye3lsbwg.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.4,
+    "numReviews": 221,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Ribbed Tank Top Set",
+    "price": 28.99,
+    "description": "Set of 2 ribbed cotton-spandex tanks in neutral colors, versatile basics.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/shfu8m0fjjxd0ilv0qt7.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 378,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Denim Jacket",
+    "price": 69.99,
+    "description": "Classic fitted denim jacket with distressed details and brass buttons.",
+    "category": "Clothing",
+    "images": [
+      "/mock_images/gddmebfj5hxv64iwzln4.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 304,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Hand-Thrown Ceramic Mug",
+    "price": 28.99,
+    "description": "Artisan wheel-thrown stoneware mug with speckled glaze, holds 12oz.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/jcyjitqfyyim5l6oz72h.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 267,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Ceramic Salad Bowl",
+    "price": 44.99,
+    "description": "Large hand-crafted ceramic salad bowl with reactive glaze finish.",
+    "category": "Pottery",
+    "images": [
+      "https://images.unsplash.com/photo-1604607051873-3f0e72ea83e8"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 143,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Bud Vase Set of 3",
+    "price": 34.99,
+    "description": "Set of 3 small ceramic bud vases in matte white, perfect for single stems.",
+    "category": "Pottery",
+    "images": [
+      "https://images.unsplash.com/photo-1563296009-b5e3d14e9fe9"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 312,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Speckled Dinner Plate Set",
+    "price": 64.99,
+    "description": "Set of 4 handmade stoneware dinner plates with textured speckled glaze.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/pwse861auaj49hmnitfr.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 189,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Ceramic Planter with Tray",
+    "price": 36.99,
+    "description": "Wheel-thrown ceramic planter with drainage hole and matching saucer.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/swehdd221hno5o1zicbo.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 234,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Handbuilt Serving Platter",
+    "price": 52.99,
+    "description": "Large oval serving platter in sage green with carved leaf detail.",
+    "category": "Pottery",
+    "images": [
+      "https://images.unsplash.com/photo-1484188878486-4a09c6b81e5c"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 97,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Espresso Cup Set",
+    "price": 38.99,
+    "description": "Set of 2 demitasse cups and saucers in rich teal reactive glaze.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/trwur2ejbne3bwmqhp7b.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 176,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Ceramic Oil Dispenser",
+    "price": 29.99,
+    "description": "Handmade ceramic olive oil dispenser with bamboo pour spout.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/lqdayyngnw6zdaarhw56.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 128,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Clay Incense Holder",
+    "price": 16.99,
+    "description": "Hand-sculpted clay incense stick and cone holder with carved design.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/irfujlj4bcqrjwrrq0qm.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 398,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Pottery Utensil Holder",
+    "price": 24.99,
+    "description": "Tall cylindrical stoneware crock for kitchen utensils, rustic finish.",
+    "category": "Pottery",
+    "images": [
+      "/mock_images/ut6b46uhdqsb4fc7b9is.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 215,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Bamboo Cutting Board Set",
+    "price": 34.99,
+    "description": "Set of 3 organic bamboo cutting boards in small, medium, and large sizes.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/yt0xtzrkat6tmouqknim.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 589,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Cast Iron Skillet",
+    "price": 44.99,
+    "description": "Pre-seasoned 10-inch cast iron skillet, oven-safe to 500�F.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/nn06h3vybueskkrwocyk.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 712,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Herb Garden Kit",
+    "price": 29.99,
+    "description": "Indoor herb growing kit with pots, soil, and seeds for basil, mint, parsley.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/ybkkt5ls00rezyqkm7rd.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 342,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Linen Apron",
+    "price": 32.99,
+    "description": "Waxed canvas chef's apron with adjustable neck strap and two pockets.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/oeytuk7w5inpr4b3w2ln.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 198,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Spice Rack Organizer",
+    "price": 27.99,
+    "description": "Rotating bamboo spice rack holds 20 jars, lazy susan style.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/m6yhkpqnk7wfgqxvei6o.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 456,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Silicone Utensil Set",
+    "price": 24.99,
+    "description": "6-piece heat-resistant silicone cooking utensil set with wooden handles.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/mfbhzjy3ltxlkrjmq1fs.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 387,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Bread Proofing Basket",
+    "price": 22.99,
+    "description": "Cane rattan banneton proofing basket for sourdough baking, 9-inch round.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/wr8hslib6kkp70c9zqz2.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 276,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Stainless Steel Mixing Bowls",
+    "price": 36.99,
+    "description": "Set of 5 nesting stainless steel mixing bowls with non-slip bases.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/hfvrqdl00ixbl5nztjj9.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 523,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Beeswax Wrap Set",
+    "price": 19.99,
+    "description": "Set of 9 reusable organic cotton beeswax food wraps, eco-friendly.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/ypfli9w0xge5fqp2rxf8.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 614,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Wooden Cookbook Stand",
+    "price": 31.99,
+    "description": "Adjustable solid bamboo cookbook and tablet holder with pull-out drawer.",
+    "category": "Kitchen",
+    "images": [
+      "/mock_images/o7nmewgwb6m6shaha1cg.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 167,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Bullet Journal Set",
+    "price": 27.99,
+    "description": "Dotted hardcover bullet journal with pen loop, bookmark, and elastic band.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/diktdlueuxer4z5jniyn.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 489,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Washi Tape Collection",
+    "price": 16.99,
+    "description": "Set of 12 decorative washi tapes in floral and geometric patterns.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/sduadz9tz23pndcdyqc6.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 673,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Fountain Pen Set",
+    "price": 44.99,
+    "description": "Calligraphy fountain pen with 6 ink cartridges and practice sheets.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/dnzexzn888plzl9vqu5k.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 234,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Desk Organizer Set",
+    "price": 32.99,
+    "description": "Marble-print desktop organizer with pen cup, tray, and file holder.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/pjiupg45xjikin9any3d.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.6,
+    "numReviews": 312,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Sticky Note Mega Pack",
+    "price": 14.99,
+    "description": "200-count assorted pastel sticky notes in 4 sizes and 6 colors.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/y6ycg3dca1t3kmx3iuu1.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 541,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Watercolor Paint Set",
+    "price": 22.99,
+    "description": "24-color professional watercolor set in tin case with two brushes.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/pwyu3yhtoymak91qqlq5.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 398,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Planner Sticker Book",
+    "price": 11.99,
+    "description": "1000+ planner stickers for scheduling, decoration, and organization.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/sikoms6hvgfjl3ejkxug.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.9,
+    "numReviews": 762,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Leather Notebook Cover",
+    "price": 38.99,
+    "description": "Handcrafted genuine leather notebook sleeve for A5 journals, refillable.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/uljcxdxmexdffzipqylr.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.7,
+    "numReviews": 176,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Gel Pen Set",
+    "price": 18.99,
+    "description": "Set of 30 premium gel pens including metallic, glitter, and pastel colors.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/yghucpmg261qin7tetdr.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.8,
+    "numReviews": 594,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  },
+  {
+    "title": "Cork Board Set",
+    "price": 24.99,
+    "description": "Set of 2 self-adhesive cork tiles with 20 pins for vision board or desk.",
+    "category": "Stationery",
+    "images": [
+      "/mock_images/ijwv68dkzjhrn6p2bstq.jpg"
+    ],
+    "stock": 50,
+    "rating": 4.5,
+    "numReviews": 287,
+    "vendor": "69a72ca596d6be33310e4ae9"
+  }
+]

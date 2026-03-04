@@ -2,19 +2,25 @@
 
 Artisan's Corner is a premium, modern multi-vendor e-commerce platform designed to connect independent creators and artisans with buyers seeking unique, handcrafted goods. 
 
-Built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS v4, it features a sleek, Apple-inspired dark mode aesthetic, robust role-based access control, and seamless state management.
+Built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tailwind CSS v4, it features a sleek, Apple-inspired aesthetic, robust role-based access control, and seamless state management.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features & Implementations
 
-- **Multi-Vendor System**: Distinct roles for `buyers`, `vendors`, and `admins`.
-- **Vendor Dashboard**: Dedicated analytics and product management interface for sellers.
-- **Modern UI/UX**: Global dark mode, glassmorphism, rounded aesthetics, and fluid animations.
-- **Offline Resilience**: Graceful frontend degradation with mock data fallbacks if the backend is unreachable.
-- **Authentication**: Secure JWT-based authentication.
-- **State Management**: Scalable global state using Redux Toolkit.
-- **Payment Processing**: Integrated with Stripe (Mock checkout capabilities enabled).
+- **Multi-Vendor System**: Distinct operational flow and protected routes for `buyers`, `vendors`, and `admins`.
+- **Comprehensive Vendor Dashboard**: 
+  - Real-time Analytics evaluating specific vendor product sales.
+  - Interactive status-filtered inventory management (`Products`, `Drafts`, `Out of Stock`).
+  - Seamless `FormData` media parsing to add new products with Cloudinary integration natively handled.
+  - Dedicated dynamic `Orders` layout specifically sliced to the vendor's sold items.
+- **Modern Shopping Experience**:
+  - Global `Shop` filtering via interactive Price ranges, Category pills, and Ratings.
+  - Responsive, scaled product grids utilizing modern card component aesthetics (shadows, transitions, badging).
+  - Dynamic `Homepage` showcasing Top Categories dynamically queried to the filter page, and top Featured arrays.
+- **Authentication**: Secure JWT-based authentication bridging seamless transition between Buyer logic and "Become a Seller" verification routing.
+- **State Management**: Scalable global state using Redux Toolkit bridging API mutations seamlessly into UI refreshes.
+- **Payment Processing**: Checkout logic integrated with Order Schema generation and dynamic commission structuring (Platform vs. Vendor payouts).
 
 ---
 
@@ -33,7 +39,7 @@ Built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tai
 - JSON Web Tokens (JWT)
 - bcryptjs (Password Hashing)
 - Cloudinary & Multer (Image Storage)
-- Stripe (Payment Intents)
+- Stripe (Payment Intents placeholder/integrations)
 
 ---
 
@@ -43,7 +49,6 @@ Built with the MERN stack (MongoDB, Express, React, Node.js) and styled with Tai
 - Node.js (v18+ recommended)
 - MongoDB (Running locally or an Atlas connection string)
 - Cloudinary Account (for image uploads)
-- Stripe Account (for payments)
 
 ### 2. Clone and Install Dependencies
 
@@ -70,7 +75,15 @@ CLOUDINARY_API_SECRET=your_api_secret
 STRIPE_SECRET_KEY=your_stripe_secret
 ```
 
-### 4. Run the Application
+### 4. Seed the Database (Required for Demo)
+To instantly populate your local store with testing products, use the included raw data file:
+1. Open **MongoDB Compass**.
+2. Connect to your `mongodb://localhost:27017` cluster.
+3. Create a database named `artisans-corner`.
+4. Create a collection named `products`.
+5. Click **Add Data > Import JSON** and select the `/demo_products.json` file located in the root of this repository.
+
+### 5. Run the Application
 
 Start both servers in separate terminals:
 
@@ -86,21 +99,23 @@ npm run dev
 
 ---
 
-## 🔑 Demo Login Details (Mock / Offline Mode)
+## 🔑 Demo Login Details (Testing Mode)
 
-If you are running the frontend without the backend connected, the app will gracefully fall back to an offline showcase mode. You can test the protected routes using these mock credentials:
+If you are running the frontend tests gracefully to evaluate components offline or pre-backend sync, use the active seeded accounts:
 
 **Test Buyer Account:**
-- **Email:** `buyer@test.com`
+- **Email:** `buyer@example.com`
 - **Password:** `password123`
 
 **Test Vendor Account:**
-- **Email:** `vendor@test.com`
+- **Email:** `vendor@example.com`
 - **Password:** `password123`
+
+*(Note: If migrating from mock state, make sure to register fresh DB instances through `/register` first).*
 
 ---
 
-## 📡 API Endpoints Overview
+## 📡 Core API Endpoints Overview
 
 | Method | Endpoint | Description | Access |
 | :--- | :--- | :--- | :--- |
@@ -112,16 +127,16 @@ If you are running the frontend without the backend connected, the app will grac
 | **Products** | | | |
 | `GET` | `/api/products` | Get all products | Public |
 | `GET` | `/api/products/:id` | Get product details | Public |
-| `POST` | `/api/products` | Create a product | Vendor/Admin |
+| `POST` | `/api/products` | Create a product via Multer | Vendor/Admin |
 | `GET` | `/api/products/vendor/me` | Get logged-in vendor's products | Vendor |
 | **Orders** | | | |
-| `POST` | `/api/orders` | Create a new order & Stripe Intent | Private |
+| `POST` | `/api/orders` | Create a new order (Checkout Flow) | Private |
 | `GET` | `/api/orders/myorders` | Get logged-in buyer's orders | Private |
 | `GET` | `/api/orders/vendor/me` | Get orders containing vendor's items | Vendor |
 
 ---
 
-## 🗄️ Database Schema
+## 🗄️ Database Schematic Matrix
 
 ```mermaid
 erDiagram
@@ -173,27 +188,30 @@ erDiagram
 
 ---
 
-## 🔄 User Flow Diagram
+## 🔄 User Flow Diagrams
 
 ```mermaid
 graph TD
     A[Public Visitor] -->|Browse Site| B(Home Page)
     B -->|Click Product| C(Product Detail View)
+    B -->|Filter Categories| S(Shop View)
     C -->|Add to Cart| D(Shopping Cart)
+    S -->|Add to Cart| D
     
     D -->|Click Checkout| E{Is Authenticated?}
     E -->|No| F[Login / Register]
     F -->|Success| G[Checkout Process]
     E -->|Yes| G
     
-    G -->|Enter Details| H[Process Payment stripe]
-    H -->|Success| I[Order Confirmation]
+    G -->|Enter Details| H[Process Order Matrix]
+    H -->|Success| I[Order Confirmation Screen]
     
     J[Authenticated User] -->|Apply via API| K{Role Check}
-    K -->|Upgraded to Vendor| L[Seller Dashboard]
-    L --> M[Manage Products]
-    L --> N[View Analytics & Earnings]
-    L --> O[Manage Orders]
+    K -->|Upgraded to Vendor| L[Vendor Setup Wizard]
+    L --> Z[Seller Dashboard Core]
+    Z --> M[Add & Manage Products]
+    Z --> N[View Accurate Revenue Analytics]
+    Z --> O[Manage & Fulfill Orders]
 ```
 
 ---
@@ -208,7 +226,7 @@ We welcome contributions to Artisan's Corner! To contribute:
 4. **Push to the branch** (`git push origin feature/amazing-feature`).
 5. **Open a Pull Request** against the `main` branch.
 
-Please ensure your code follows the existing Tailwind v4 stylistic guidelines and that all React/Redux components remain strictly typed and well-documented.
+Please ensure your code follows the existing Tailwind v4 stylistic guidelines and that all React/Redux components remain cleanly structured.
 
 ---
 *Built with ❤️ for modern web artisans.*
