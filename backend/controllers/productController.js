@@ -1,5 +1,6 @@
 import Product from '../models/Product.js';
 import Review from '../models/Review.js';
+import { uploadToCloudinary } from '../config/cloudinary.js';
 
 // @desc    Get all products
 // @route   GET /api/products
@@ -58,8 +59,9 @@ export const createProduct = async (req, res) => {
         const { title, description, price, category, stock } = req.body;
         let images = [];
 
-        if (req.files) {
-            images = req.files.map((file) => file.path);
+        if (req.files && req.files.length > 0) {
+            const uploadPromises = req.files.map(file => uploadToCloudinary(file.buffer));
+            images = await Promise.all(uploadPromises);
         }
 
         const product = new Product({
@@ -101,7 +103,8 @@ export const updateProduct = async (req, res) => {
             product.stock = stock !== undefined ? stock : product.stock;
 
             if (req.files && req.files.length > 0) {
-                product.images = req.files.map((file) => file.path);
+                const uploadPromises = req.files.map(file => uploadToCloudinary(file.buffer));
+                product.images = await Promise.all(uploadPromises);
             }
 
             const updatedProduct = await product.save();
