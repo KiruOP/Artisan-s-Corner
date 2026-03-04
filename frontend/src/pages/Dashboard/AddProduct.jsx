@@ -146,7 +146,7 @@ const AddProduct = () => {
                                     <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 6.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 5.414V13a1 1 0 11-2 0V5.414L7.707 6.707a1 1 0 01-1.414 0z" clipRule="evenodd" /></svg>
                                 </div>
                                 <p className="font-bold text-gray-900 text-base">Click to upload or drag and drop</p>
-                                <p className="text-sm text-gray-500 font-medium. mt-1">SVG, PNG, JPG or GIF (max. 3MB)</p>
+                                <p className="text-sm text-gray-500 font-medium mt-1">SVG, PNG, JPG or GIF (max. 3MB)</p>
                             </div>
 
                             <div className="flex gap-4 overflow-x-auto pb-2">

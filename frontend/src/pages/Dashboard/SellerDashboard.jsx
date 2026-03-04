@@ -35,8 +35,9 @@ const SellerDashboard = () => {
 
                 // Calculate Stats
                 const totalSales = fetchedOrders.reduce((acc, order) => {
-                    const vendorPayout = order.vendorPayout.find(v => v.vendor.toString() === user._id || user.roles.includes('admin'));
-                    return acc + (vendorPayout ? vendorPayout.amount : 0);
+                    // Extract exactly what the vendor sold within the global order object
+                    const vendorTotal = order.orderItems.reduce((itemAcc, item) => itemAcc + (item.price * item.qty), 0);
+                    return acc + vendorTotal;
                 }, 0);
 
                 setStats({
@@ -214,25 +215,30 @@ const SellerDashboard = () => {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50">
-                                {orders.map((order) => (
-                                    <tr key={order._id} className="hover:bg-gray-50/50 transition-colors cursor-pointer group">
-                                        <td className="px-6 py-4 pl-8 whitespace-nowrap text-sm font-bold text-[#4ede35]">#{order._id.substring(0, 8).toUpperCase()}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">{new Date(order.createdAt).toLocaleDateString()}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{order?.user?.name || 'Guest User'}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-black text-gray-900">₹{order.totalAmount.toFixed(2)}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            {order.isPaid ? (
-                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fbf4] border border-[#dcfce7] text-[#2ecc71] text-xs font-bold">
-                                                    Paid/Processing
-                                                </span>
-                                            ) : (
-                                                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-500 text-xs font-bold">
-                                                    Pending Payment
-                                                </span>
-                                            )}
-                                        </td>
-                                    </tr>
-                                ))}
+                                {orders.map((order) => {
+                                    // Calculate vendor slice of order
+                                    const vendorTotal = order.orderItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
+
+                                    return (
+                                        <tr key={order._id} className="hover:bg-gray-50/50 transition-colors cursor-pointer group">
+                                            <td className="px-6 py-4 pl-8 whitespace-nowrap text-sm font-bold text-[#4ede35]">#{order._id.substring(0, 8).toUpperCase()}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-600">{new Date(order.createdAt).toLocaleDateString()}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">{order?.user?.name || 'Guest User'}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap text-sm font-black text-gray-900">₹{vendorTotal.toFixed(2)}</td>
+                                            <td className="px-6 py-4 whitespace-nowrap">
+                                                {order.isPaid ? (
+                                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f0fbf4] border border-[#dcfce7] text-[#2ecc71] text-xs font-bold">
+                                                        Paid/Processing
+                                                    </span>
+                                                ) : (
+                                                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-500 text-xs font-bold">
+                                                        Pending Payment
+                                                    </span>
+                                                )}
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
                                 {orders.length === 0 && (
                                     <tr>
                                         <td colSpan="5" className="px-6 py-8 whitespace-nowrap text-sm text-gray-500 font-medium text-center">No orders yet. Keep promoting your products!</td>

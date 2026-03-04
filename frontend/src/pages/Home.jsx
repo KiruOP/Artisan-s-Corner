@@ -128,12 +128,12 @@ const Home = () => {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {displayCategories.length > 0 ? displayCategories.slice(0, 6).map((cat, idx) => (
-                        <div key={idx} className="group block cursor-pointer">
-                            <div className="rounded-2xl overflow-hidden bg-gray-100 mb-3 aspect-square relative">
+                        <Link key={idx} to={`/shop?category=${encodeURIComponent(cat.name)}`} className="group block cursor-pointer">
+                            <div className="rounded-2xl overflow-hidden bg-gray-100 mb-3 aspect-square relative shadow-sm">
                                 <img src={cat.image} alt={cat.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
                             </div>
-                            <h3 className="text-center font-medium text-gray-900 group-hover:text-[var(--color-brand)] transition-colors">{cat.name}</h3>
-                        </div>
+                            <h3 className="text-center font-bold text-gray-900 group-hover:text-[var(--color-brand)] transition-colors text-sm">{cat.name}</h3>
+                        </Link>
                     )) : (
                         [1, 2, 3, 4, 5, 6].map((i) => (
                             <div key={i} className="group block cursor-pointer">
@@ -154,15 +154,15 @@ const Home = () => {
                         <button className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50"><svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg></button>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {products.map((product) => (
-                        <Link key={product._id} to={`/product/${product._id}`} className="group block mb-4 border border-gray-100 rounded-3xl p-3 hover:shadow-lg transition-shadow bg-white">
-                            <div className="relative rounded-2xl overflow-hidden bg-gray-100 aspect-[4/3] sm:aspect-square">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    {products.slice(0, 8).map((product) => (
+                        <Link key={product._id} to={`/product/${product._id}`} className="group block mb-2 border border-gray-100 rounded-[1.5rem] p-2 hover:shadow-md hover:-translate-y-1 transition-all bg-white">
+                            <div className="relative rounded-xl overflow-hidden bg-gray-100 aspect-square">
                                 {product.isSale && (
-                                    <span className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">SALE</span>
+                                    <span className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full z-10">SALE</span>
                                 )}
-                                <button className="absolute top-3 right-3 bg-white/80 p-2 rounded-full z-10 hover:bg-white" onClick={(e) => { e.preventDefault(); }}>
-                                    <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+                                <button className="absolute top-2 right-2 bg-white/80 p-1.5 rounded-full z-10 hover:bg-white" onClick={(e) => { e.preventDefault(); }}>
+                                    <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
                                 </button>
                                 <img
                                     src={product.images[0]?.startsWith('http') ? product.images[0] : 'https://placehold.co/400x400/f3f4f6/a1a1aa'}
@@ -170,31 +170,31 @@ const Home = () => {
                                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                                 />
                             </div>
-                            <div className="pt-4 pb-2 px-1">
-                                <div className="flex justify-between items-start mb-1">
-                                    <h3 className="text-lg font-semibold text-gray-900 truncate pr-2">
+                            <div className="pt-3 pb-1 px-1.5">
+                                <div className="flex justify-between items-start mb-0.5">
+                                    <h3 className="text-sm font-bold text-gray-900 truncate pr-2">
                                         {product.title}
                                     </h3>
-                                    <div className="flex items-center gap-1 bg-gray-100 px-2 flex-shrink-0 py-0.5 rounded text-xs font-medium text-gray-700">
-                                        <svg className="w-3 h-3 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                    <div className="flex items-center gap-1 bg-gray-100 px-1.5 flex-shrink-0 py-0.5 rounded text-[10px] font-bold text-gray-700">
+                                        <svg className="w-2.5 h-2.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
                                         {product.rating || (Math.random() * (5 - 4) + 4).toFixed(1)}
                                     </div>
                                 </div>
-                                <p className="text-sm text-gray-500 mb-3 line-clamp-1">by {product.vendor?.name}</p>
+                                <p className="text-[11px] font-medium text-gray-500 mb-2 line-clamp-1">by {product.vendor?.name}</p>
 
-                                <div className="flex items-center justify-between mt-2">
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-lg font-bold text-[var(--color-brand)]">₹{product.price.toFixed(2)}</span>
+                                <div className="flex items-center justify-between mt-1">
+                                    <div className="flex items-baseline gap-1.5">
+                                        <span className="text-sm border border-[var(--color-brand)] bg-[#f4fdf4] font-black px-2 py-0.5 rounded-lg text-[var(--color-brand)]">₹{product.price.toFixed(2)}</span>
                                         {product.oldPrice && (
-                                            <span className="text-sm text-gray-400 line-through">₹{product.oldPrice.toFixed(2)}</span>
+                                            <span className="text-[10px] font-bold text-gray-400 line-through">₹{product.oldPrice.toFixed(2)}</span>
                                         )}
                                     </div>
                                     <button
                                         onClick={(e) => handleAddToCart(e, product)}
-                                        className="flex justify-center items-center w-10 h-10 bg-gray-900 hover:bg-gray-800 text-white rounded-full transition-colors duration-300"
+                                        className="flex justify-center items-center w-8 h-8 bg-gray-900 hover:bg-[var(--color-brand)] text-white rounded-full transition-colors duration-300"
                                     >
-                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                                         </svg>
                                     </button>
                                 </div>

@@ -121,7 +121,7 @@ const VendorSetup = () => {
                                     placeholder="e.g. Clay & Earth Ceramics"
                                 />
                             </div>
-                            <p className="text-xs text-gray-400 mt-1">This will be displayed on your shop page.</p>
+                            <p className="text-xs text-gray-400 mt-1">This will be your brand identity displayed to buyers across the marketplace.</p>
                         </div>
 
                         <div className="space-y-2">
@@ -135,7 +135,7 @@ const VendorSetup = () => {
                                 placeholder="Describe your craft, your materials, and what makes your creations unique..."
                                 maxLength="500"
                             ></textarea>
-                            <p className="text-xs text-gray-400 mt-1 text-right">{description.length}/500 characters</p>
+                            <p className="text-xs text-gray-400 mt-2 text-right">{description.length}/500 characters</p>
                         </div>
 
                         <button

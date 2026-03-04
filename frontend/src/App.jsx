@@ -14,6 +14,7 @@ import OrderConfirmation from './pages/OrderConfirmation';
 import SellerDashboard from './pages/Dashboard/SellerDashboard';
 import VendorSetup from './pages/Dashboard/VendorSetup';
 import VendorProducts from './pages/Dashboard/VendorProducts';
+import VendorOrders from './pages/Dashboard/VendorOrders';
 import AddProduct from './pages/Dashboard/AddProduct';
 import ProtectedRoute from './components/ProtectedRoute';
 import NotFound from './pages/NotFound';
@@ -70,6 +71,14 @@ function App() {
                 element={
                   <ProtectedRoute roles={['vendor']}>
                     <VendorProducts />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/orders"
+                element={
+                  <ProtectedRoute roles={['vendor']}>
+                    <VendorOrders />
                   </ProtectedRoute>
                 }
               />
